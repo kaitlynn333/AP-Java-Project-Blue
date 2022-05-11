@@ -1,0 +1,43 @@
+
+import javax.swing.*;
+ 
+public class GuessingGame {
+    public static void main(String[] args) {
+        /** picking the computer generated number **/
+        int computerNumber = (int) (Math.random()*100 + 1);
+        int userAnswer = 0;
+
+        /** the correct answer shows up in the terminal **/
+        System.out.println("To win, the input will be " + computerNumber);
+        int count = 1;
+
+        /** panel where user inputs number **/
+        while (userAnswer != computerNumber)
+        {
+            String response = JOptionPane.showInputDialog(null,
+                "Enter a guess between 1 and 100", "Guessing Game", 3);
+            userAnswer = Integer.parseInt(response);
+            JOptionPane.showMessageDialog(null, ""+ determineGuess(userAnswer, computerNumber, count));
+            count++;
+        }  
+    }
+
+        /** java else-if statements; output for input **/
+    public static String determineGuess(int userAnswer, int computerNumber, int count){
+        if (userAnswer <=0 || userAnswer >100) {
+            return "Your guess is invalid; the input needs to be between 1 and 100.";
+        }
+        else if (userAnswer == computerNumber ){
+            return "Correct!\nTotal Guesses: " + count;
+        }
+        else if (userAnswer > computerNumber) {
+            return "Your guess is too high, try again.\nTry Number: " + count;
+        }
+        else if (userAnswer < computerNumber) {
+            return "Your guess is too low, try again.\nTry Number: " + count;
+        }
+        else {
+            return "Your guess is incorrect\nTry Number: " + count;
+        }
+    }
+}
